@@ -2160,12 +2160,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       disabled: true,
       // 初期値の設定
       text_value: "",
+      show: true,
+      category: "A",
+      tyonbo_text: "",
       lists: [{
         id: 1,
         name: "ProductA",
@@ -2217,6 +2278,15 @@ __webpack_require__.r(__webpack_exports__);
         this.text_value = "";
       }
     },
+    onChangeTyonbo: function onChangeTyonbo(event) {
+      // クリックイベントでイベント発火
+      if (event.target.value === "tyonbo_on") {
+        // input type="radio"のvalueを取得して判定
+        this.show = true;
+      } else {
+        this.show = false;
+      }
+    },
     dragList: function dragList(event, dragId) {
       event.dataTransfer.effectAllowed = "move";
       event.dataTransfer.dropEffect = "move";
@@ -2228,6 +2298,20 @@ __webpack_require__.r(__webpack_exports__);
         return list.id == dragId;
       });
       dragList.category = dropCategory;
+    },
+    addTyonbo: function addTyonbo(event) {
+      console.log(this.category);
+      var last = this.lists.slice(-1)[0];
+      console.log(last.id + 1);
+      var item = {
+        id: last.id + 1,
+        name: this.tyonbo_text,
+        category: this.category
+      };
+      this.lists.push(item);
+    },
+    deleteItem: function deleteItem(index) {
+      this.lists.splice(index, 1);
     }
   }
 });
@@ -4148,187 +4232,384 @@ var render = function() {
     _vm._v(" "),
     _c("h1", [_vm._v("tyonnnn")]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "custom-control custom-radio" }, [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: {
+            type: "radio",
+            name: "tyonbo",
+            id: "tyonbo_on",
+            value: "tyonbo_on",
+            checked: ""
+          },
+          on: { change: _vm.onChangeTyonbo }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "custom-control-label", attrs: { for: "tyonbo_on" } },
+          [_vm._v("あり")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "custom-control custom-radio" }, [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: {
+            type: "radio",
+            name: "tyonbo",
+            id: "tyonbo_off",
+            value: "tyonbo_off"
+          },
+          on: { change: _vm.onChangeTyonbo }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "custom-control-label", attrs: { for: "tyonbo_off" } },
+          [_vm._v("なし")]
+        )
+      ])
+    ]),
     _vm._v(" "),
-    _c("div", { staticClass: "d-flex justify-content-between bg-dark p-3" }, [
-      _c(
-        "div",
-        {
-          staticClass: "bg-secondary p-2 m-2 w-100",
-          on: {
-            drop: function($event) {
-              return _vm.dropList($event, "A")
-            },
-            dragover: function($event) {
-              $event.preventDefault()
-            },
-            dragenter: function($event) {
-              $event.preventDefault()
-            }
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.show,
+            expression: "show"
           }
-        },
-        [
-          _c("h2", { staticClass: "text-light" }, [_vm._v("Category A")]),
-          _vm._v(" "),
-          _vm._l(_vm.CategoryA, function(list, index) {
-            return _c(
+        ]
+      },
+      [
+        _vm._v(
+          "\n    ※ドラッグ＆ドロップで各項目を各エリアに移動できます。\n    "
+        ),
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-between bg-dark p-3" },
+          [
+            _c(
               "div",
               {
-                key: list.id,
-                staticClass: "bg-white m-2 p-2",
-                attrs: { draggable: "" },
+                staticClass: "bg-secondary p-2 m-2 w-100",
                 on: {
-                  dragstart: function($event) {
-                    return _vm.dragList($event, list.id)
+                  drop: function($event) {
+                    return _vm.dropList($event, "A")
+                  },
+                  dragover: function($event) {
+                    $event.preventDefault()
+                  },
+                  dragenter: function($event) {
+                    $event.preventDefault()
                   }
                 }
               },
-              [_vm._v(_vm._s(list.name))]
-            )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "bg-secondary p-2 m-2 w-100",
-          on: {
-            drop: function($event) {
-              return _vm.dropList($event, "B")
-            },
-            dragover: function($event) {
-              $event.preventDefault()
-            },
-            dragenter: function($event) {
-              $event.preventDefault()
-            }
-          }
-        },
-        [
-          _c("h2", { staticClass: "text-light" }, [_vm._v("Category B")]),
-          _vm._v(" "),
-          _vm._l(_vm.CategoryB, function(list, index) {
-            return _c(
+              [
+                _c("h2", { staticClass: "text-light" }, [_vm._v("Category A")]),
+                _vm._v(" "),
+                _vm._l(_vm.CategoryA, function(list, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: list.id,
+                      staticClass: "bg-white m-2 p-2",
+                      attrs: { draggable: "" },
+                      on: {
+                        dragstart: function($event) {
+                          return _vm.dragList($event, list.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", [_vm._v(_vm._s(list.name))]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteItem(index)
+                              }
+                            }
+                          },
+                          [_vm._v("削除")]
+                        )
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
               "div",
               {
-                key: list.id,
-                staticClass: "bg-white m-2 p-2",
-                attrs: { draggable: "" },
+                staticClass: "bg-secondary p-2 m-2 w-100",
                 on: {
-                  dragstart: function($event) {
-                    return _vm.dragList($event, list.id)
+                  drop: function($event) {
+                    return _vm.dropList($event, "B")
+                  },
+                  dragover: function($event) {
+                    $event.preventDefault()
+                  },
+                  dragenter: function($event) {
+                    $event.preventDefault()
                   }
                 }
               },
-              [_vm._v(_vm._s(list.name))]
-            )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "bg-secondary p-2 m-2 w-100",
-          on: {
-            drop: function($event) {
-              return _vm.dropList($event, "C")
-            },
-            dragover: function($event) {
-              $event.preventDefault()
-            },
-            dragenter: function($event) {
-              $event.preventDefault()
-            }
-          }
-        },
-        [
-          _c("h2", { staticClass: "text-light" }, [_vm._v("Category C")]),
-          _vm._v(" "),
-          _vm._l(_vm.CategoryC, function(list, index) {
-            return _c(
+              [
+                _c("h2", { staticClass: "text-light" }, [_vm._v("Category B")]),
+                _vm._v(" "),
+                _vm._l(_vm.CategoryB, function(list, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: list.id,
+                      staticClass: "bg-white m-2 p-2",
+                      attrs: { draggable: "" },
+                      on: {
+                        dragstart: function($event) {
+                          return _vm.dragList($event, list.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", [_vm._v(_vm._s(list.name))]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteItem(index)
+                              }
+                            }
+                          },
+                          [_vm._v("削除")]
+                        )
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
               "div",
               {
-                key: list.id,
-                staticClass: "bg-white m-2 p-2",
-                attrs: { draggable: "" },
+                staticClass: "bg-secondary p-2 m-2 w-100",
                 on: {
-                  dragstart: function($event) {
-                    return _vm.dragList($event, list.id)
+                  drop: function($event) {
+                    return _vm.dropList($event, "C")
+                  },
+                  dragover: function($event) {
+                    $event.preventDefault()
+                  },
+                  dragenter: function($event) {
+                    $event.preventDefault()
                   }
                 }
               },
-              [_vm._v(_vm._s(list.name))]
+              [
+                _c("h2", { staticClass: "text-light" }, [_vm._v("Category C")]),
+                _vm._v(" "),
+                _vm._l(_vm.CategoryC, function(list, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: list.id,
+                      staticClass: "bg-white m-2 p-2",
+                      attrs: { draggable: "" },
+                      on: {
+                        dragstart: function($event) {
+                          return _vm.dragList($event, list.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", [_vm._v(_vm._s(list.name))]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteItem(index)
+                              }
+                            }
+                          },
+                          [_vm._v("削除")]
+                        )
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
             )
-          })
-        ],
-        2
-      )
-    ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.tyonbo_text,
+                expression: "tyonbo_text"
+              }
+            ],
+            staticClass: "form-control d-inline col-md-5",
+            attrs: { type: "text" },
+            domProps: { value: _vm.tyonbo_text },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.tyonbo_text = $event.target.value
+              }
+            }
+          }),
+          _vm._v("を\n      "),
+          _c("div", { staticClass: "custom-control custom-radio" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category,
+                  expression: "category"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: {
+                type: "radio",
+                name: "tyonbo_select",
+                id: "tyonbo_select-1",
+                value: "A",
+                checked: ""
+              },
+              domProps: { checked: _vm._q(_vm.category, "A") },
+              on: {
+                change: function($event) {
+                  _vm.category = "A"
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "tyonbo_select-1" }
+              },
+              [_vm._v("Category A")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "custom-control custom-radio" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category,
+                  expression: "category"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: {
+                type: "radio",
+                name: "tyonbo_select",
+                id: "tyonbo_select-2",
+                value: "B"
+              },
+              domProps: { checked: _vm._q(_vm.category, "B") },
+              on: {
+                change: function($event) {
+                  _vm.category = "B"
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "tyonbo_select-2" }
+              },
+              [_vm._v("Category B")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "custom-control custom-radio" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category,
+                  expression: "category"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: {
+                type: "radio",
+                name: "tyonbo_select",
+                id: "tyonbo_select-3",
+                value: "C"
+              },
+              domProps: { checked: _vm._q(_vm.category, "C") },
+              on: {
+                change: function($event) {
+                  _vm.category = "C"
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "tyonbo_select-3" }
+              },
+              [_vm._v("Category C")]
+            )
+          ]),
+          _vm._v("に\n      "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.addTyonbo }
+            },
+            [_vm._v("追加")]
+          )
+        ])
+      ]
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "div",
-        { staticClass: "custom-control custom-radio custom-control-inline" },
-        [
-          _c("input", {
-            staticClass: "custom-control-input",
-            attrs: {
-              type: "radio",
-              name: "tyonbo",
-              id: "tyonbo_on",
-              value: "tyonbo_on",
-              checked: ""
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "custom-control-label",
-              attrs: { for: "tyonbo_on" }
-            },
-            [_vm._v("選択肢2")]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "custom-control custom-radio custom-control-inline" },
-        [
-          _c("input", {
-            staticClass: "custom-control-input",
-            attrs: {
-              type: "radio",
-              name: "tyonbo",
-              id: "tyonbo_off",
-              value: "tyonbo_off"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "custom-control-label",
-              attrs: { for: "tyonbo_off" }
-            },
-            [_vm._v("選択肢2")]
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
