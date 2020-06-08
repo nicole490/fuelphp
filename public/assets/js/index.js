@@ -2310,8 +2310,15 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.lists.push(item);
     },
-    deleteItem: function deleteItem(index) {
-      this.lists.splice(index, 1);
+    deleteItem: function deleteItem(list_id) {
+      console.log(this.lists);
+      var lists = this.lists;
+      lists.some(function (v, i) {
+        if (v.id == list_id) {
+          lists.splice(i, 1);
+        }
+      });
+      this.lists = lists;
     }
   }
 });
@@ -4336,7 +4343,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteItem(index)
+                                return _vm.deleteItem(list.id)
                               }
                             }
                           },
@@ -4393,7 +4400,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteItem(index)
+                                return _vm.deleteItem(list.id)
                               }
                             }
                           },
@@ -4450,7 +4457,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteItem(index)
+                                return _vm.deleteItem(list.id)
                               }
                             }
                           },

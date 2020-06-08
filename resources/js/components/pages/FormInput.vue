@@ -90,7 +90,7 @@
           >
             <div>{{ list.name }}</div>
             <div class="text-right">
-              <button type="button" class="btn btn-danger" v-on:click="deleteItem(index)">削除</button>
+              <button type="button" class="btn btn-danger" v-on:click="deleteItem(list.id)">削除</button>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
           >
             <div>{{ list.name }}</div>
             <div class="text-right">
-              <button type="button" class="btn btn-danger" v-on:click="deleteItem(index)">削除</button>
+              <button type="button" class="btn btn-danger" v-on:click="deleteItem(list.id)">削除</button>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
           >
             <div>{{ list.name }}</div>
             <div class="text-right">
-              <button type="button" class="btn btn-danger" v-on:click="deleteItem(index)">削除</button>
+              <button type="button" class="btn btn-danger" v-on:click="deleteItem(list.id)">削除</button>
             </div>
           </div>
         </div>
@@ -266,8 +266,15 @@ export default {
       };
       this.lists.push(item);
     },
-    deleteItem(index) {
-        this.lists.splice(index, 1);
+    deleteItem(list_id) {
+      console.log(this.lists);
+      let lists = this.lists
+      lists.some(function(v, i) {
+        if (v.id == list_id) {
+          lists.splice(i, 1);
+        }
+      });
+      this.lists = lists;
     }
   }
 };
